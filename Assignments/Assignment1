@@ -1,0 +1,22 @@
+# question 1(a) - create a list
+x <- list(name = c("Alex", "Bob", "Claire", "Denise"), female = c(F, F, T, T), age = c(20, 25, 30, 35))
+x
+
+# question 1(b) - get name "Bob" from list
+x$name[2]
+
+
+# question 2(a) - create data frame
+name <- c("Alex", "Bob", "Claire", "Denise")
+female <- c(FALSE, FALSE, TRUE, TRUE)
+age <- c(20, 25, 30, 35)
+df <- data.frame(name, female, age, stringsAsFactors = F)
+colnames(df) <- c("name", "female", "age")
+rownames(df) <- c("row_1", "row_2", "row_3", "row_4")
+df
+
+# question 2(b) - calculate mean of age column
+mean(df$age)
+
+# question 2(c) - retrieve Claire's age
+df$age[3]
