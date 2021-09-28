@@ -1,5 +1,7 @@
 # CIS 4730 - Summer 2021 (Professor Zhang) - Course Project (Group #3)
 # By: David Catalan Perez, Vandyck Buabeng, Kristen Hanold, & Reuben Akipogu
+# Dataset used ("phone_user_review_file_1"): https://www.kaggle.com/masaladata/14-million-cell-phone-reviews
+
 
 # Installing Packages into the R Environment
 install.packages("rvest")
