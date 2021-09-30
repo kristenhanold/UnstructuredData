@@ -1,0 +1,59 @@
+# Lab Assignment 1/2
+# install and load necessary packages for lab
+install.packages("rvest")
+install.packages("httr")
+install.packages("stringr")
+install.packages("tidyverse")
+library(rvest)
+library(httr)
+library(tidyverse)
+library(stringr)
+
+# storing link into variable atlanta and reading HTML
+atlanta <- read_html("https://en.wikipedia.org/wiki/Atlanta")
+atlanta
+
+# retrieving Mayor's name
+mayor_name <- atlanta %>%
+  html_nodes(css = ".mergedrow:nth-child(18) .infobox-data a:nth-child(1)") %>%
+  html_text()
+mayor_name
+
+# retrieving image source URL for ATL City Hall
+atl_city_hall <- atlanta %>%
+  html_nodes(css = ".tleft:nth-child(147) .thumbimage") %>%
+  html_attr("src")
+atl_city_hall
+
+# retrieving paragraph for the 1996 Summer Olympic Games
+olympic <- atlanta %>%
+  html_nodes(css = "p:nth-child(39)") %>%
+  html_text()
+olympic
+
+# retrieving links from "External Links" section
+externalLinks <- atlanta %>%
+  html_nodes(css = "ul:nth-child(213) a") %>%
+  html_attr("href")
+externalLinks
+
+# retrieving "Historical Population" table
+hist_pop <- atlanta %>% 
+  html_nodes(css = ".toccolours") %>% # Historical Population css selector using SelectorGadget
+  html_table()
+
+
+hist_pop_table <- hist_pop[[1]] # hist_pop is currently a list, so we're converting it into a data frame and storing it into hist_pop_table
+class(hist_pop_table) # confirming that hist_pop_table has been stored as a data frame
+colnames(hist_pop_table) <- c("Census", "Pop.", NA, "%±")
+hist_pop_table[c(2:19), c(1:2,4)] # retrieving rows 2-19 and columns 1, 2 and 4 from hist_pop_table data frame
+
+
+
+
+# Lab Assignment 2/2
+# install necessary packages
+z <- "@GeorgiaStateU: My two email addresses are smith77@gsu.edu and 
+alex.smith@yahoo.com.uk"
+my_regex = "[a|s]+[a-z0-9.]*@[a-z]*\\.(edu|com)[a-z.]*"
+stringr::str_extract_all(z, my_regex)[[1]]
