@@ -1,0 +1,40 @@
+# 1.1
+df %>%
+  filter(fireplaces == FALSE) %>%
+  select(c(price, air_cond, heat, fireplaces))
+
+# 1.2
+df %>%
+  mutate(price_per_bedroom = price / num(rooms)) %>%
+  select(c(price, rooms, price_per_bedroom)) %>%
+  arrange(desc(price_per_bedroom))
+
+# 1.3
+df %>%
+  mutate(has_4_or_more_bedrooms = ifelse(num(rooms) >= 4, TRUE, FALSE)) %>%
+  select(rooms, has_4_or_more_bedrooms) %>%
+  group_by(rooms) %>%
+  summarise(has_4_or_more_bedrooms >= 4)
+
+# 2.1
+is_even <- function(num) {
+  if(is.numeric(num) == FALSE) {
+    print(NA)
+  }
+  else if(num %% 2 == 0) {
+    print(TRUE)
+  }
+  else {
+    print(FALSE)
+  }
+}
+
+is_even(2)
+
+# 2.2
+sum = 0
+for (x in -50:50) {
+  sum = sum + x 
+  x = x + 2
+}
+print(sum)
